@@ -1,0 +1,14 @@
+{
+    "name": "ahmadasjad/php-mysql-mysqli-migration",
+    "require": {
+        "php": "^7.0"
+    },
+    "require-dev": {
+        "rector/rector": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "AhmadAsjad\\Refactor\\MysqlToMysqli\\": "./src/Rector/MysqlToMysqli"
+        }
+    }
+}
