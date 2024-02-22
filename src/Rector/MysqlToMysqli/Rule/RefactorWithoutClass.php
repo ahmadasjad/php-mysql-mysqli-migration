@@ -12,6 +12,32 @@ class RefactorWithoutClass
 {
     private $optionalConParamRequiredConParamMap = [
         // 'old_func_name'=> position by zero index,
+        'mysql_client_encoding' => 0,
+        'mysql_close' => 0,
+        'mysql_db_name' => 0,
+        'mysql_db_query' => 0,
+        'mysql_drop_db' => 0,
+        'mysql_errno' => 0,
+        'mysql_error' => 0,
+        'mysql_escape_string' => 0,
+        'mysql_fetch_field' => null, // No optional $link_identifier
+        'mysql_fetch_lengths' => 0,
+        'mysql_fetch_row' => 0,
+        'mysql_field_seek' => null, // No optional $link_identifier
+        'mysql_field_table' => null, // No optional $link_identifier
+        'mysql_field_type' => null, // No optional $link_identifier
+        'mysql_free_result' => 0,
+        'mysql_list_dbs' => 0,
+        'mysql_list_fields' => 2,
+        'mysql_list_processes' => 0,
+        'mysql_num_rows' => 0,
+        'mysql_ping' => 0,
+        'mysql_query' => 1,
+        'mysql_real_escape_string' => 1,
+        'mysql_select_db' => 1,
+        'mysql_tablename' => 1,
+        'mysql_thread_id' => 0,
+        'mysql_unbuffered_query' => 1,
     ];
 
     private $swithArgPositionMap = [
