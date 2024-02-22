@@ -6,7 +6,7 @@ use AhmadAsjad\Refactor\MysqlToMysqli\Functions\Interfaces\FunctionInterface;
 use AhmadAsjad\Refactor\MysqlToMysqli\Functions\Traits\OnlyNameChangeIsEnoughTrait;
 use AhmadAsjad\Refactor\MysqlToMysqli\Param\ParamRequired;
 
-class MysqlFetchAssoc implements FunctionInterface
+class MysqlFetchAssoc extends AbstractMysqlFunction implements FunctionInterface
 {
     use OnlyNameChangeIsEnoughTrait;
     public function getOldFunctionName(): string

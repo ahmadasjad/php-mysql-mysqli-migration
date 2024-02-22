@@ -5,7 +5,7 @@ namespace AhmadAsjad\Refactor\MysqlToMysqli\Functions;
 use AhmadAsjad\Refactor\MysqlToMysqli\Functions\Interfaces\FunctionInterface;
 use AhmadAsjad\Refactor\MysqlToMysqli\Functions\Traits\OnlyLinkIdentifierToMysqliTrait;
 
-class MysqlErrorNo implements FunctionInterface
+class MysqlErrorNo extends AbstractMysqlFunction implements FunctionInterface
 {
     use OnlyLinkIdentifierToMysqliTrait;
     public function getOldFunctionName(): string

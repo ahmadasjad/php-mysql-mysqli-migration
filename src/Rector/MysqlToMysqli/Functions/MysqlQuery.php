@@ -12,7 +12,7 @@ use PhpParser\Node\Expr\ConstFetch;
 use PhpParser\Node\Name;
 use Rector\Rector\AbstractRector;
 
-class MysqlQuery implements FunctionInterface
+class MysqlQuery extends AbstractMysqlFunction implements FunctionInterface
 {
     public function getOldFunctionName(): string
     {
@@ -39,16 +39,6 @@ class MysqlQuery implements FunctionInterface
             (new ParamRequired())->setName('$query')->setType('string')->setValueIfNull('null'),
             (new ParamOptional())->setName('$result_mode')->setType('int'),
         ];
-    }
-
-    public function getOldReturnType(): string
-    {
-        return '';
-    }
-
-    public function getNewReturnType(): string
-    {
-        return '';
     }
 
     public function changeParams(Node $node, AbstractRector $rector): Node

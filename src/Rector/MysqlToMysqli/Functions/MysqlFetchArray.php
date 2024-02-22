@@ -7,7 +7,7 @@ use AhmadAsjad\Refactor\MysqlToMysqli\Functions\Traits\OnlyNameChangeIsEnoughTra
 use AhmadAsjad\Refactor\MysqlToMysqli\Param\ParamOptional;
 use AhmadAsjad\Refactor\MysqlToMysqli\Param\ParamRequired;
 
-class MysqlFetchArray implements FunctionInterface
+class MysqlFetchArray extends AbstractMysqlFunction implements FunctionInterface
 {
     use OnlyNameChangeIsEnoughTrait;
     public function getOldFunctionName(): string

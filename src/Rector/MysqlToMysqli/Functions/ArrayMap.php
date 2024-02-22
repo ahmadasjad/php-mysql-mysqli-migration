@@ -12,7 +12,7 @@ use PhpParser\Node\Expr\ConstFetch;
 use PhpParser\Node\Name;
 use Rector\Rector\AbstractRector;
 
-class ArrayMap implements FunctionInterface
+class ArrayMap extends AbstractMysqlFunction implements FunctionInterface
 {
 
     public function getOldFunctionName(): string

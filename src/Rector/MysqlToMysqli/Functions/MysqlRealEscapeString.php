@@ -12,9 +12,8 @@ use PhpParser\Node\Expr\ConstFetch;
 use PhpParser\Node\Name;
 use Rector\Rector\AbstractRector;
 
-class MysqlRealEscapeString implements FunctionInterface
+class MysqlRealEscapeString extends AbstractMysqlFunction implements FunctionInterface
 {
-
     public function getOldFunctionName(): string
     {
         return 'mysql_real_escape_string';
@@ -39,11 +38,6 @@ class MysqlRealEscapeString implements FunctionInterface
             (new ParamRequired())->setName('$mysql')->setType('mysqli')->setValueIfNull(ChangeMysqlToMysqli::getDbConnectionVariable()),
             (new ParamRequired())->setName('$query')->setType('string')->setValueIfNull('""'),
         ];
-    }
-
-    public function getOldReturnType(): string
-    {
-        return '';
     }
 
     public function getNewReturnType(): string
