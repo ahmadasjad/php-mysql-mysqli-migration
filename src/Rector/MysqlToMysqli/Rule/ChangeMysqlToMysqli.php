@@ -141,6 +141,11 @@ class ChangeMysqlToMysqli extends AbstractRector
         if (array_key_exists($functionCallName, $this->function_class_map)) {
             return $this->refactorFunctionWithClass($node, $functionCallName);
         }
+
+        if (array_key_exists($functionCallName, $this->function_function_map)) {
+            return $this->refactorFunctionWithoutClass($node, $functionCallName);
+        }
+
         return null;
     }
 
@@ -160,6 +165,20 @@ class ChangeMysqlToMysqli extends AbstractRector
         }
 
         return $funcChanging->changeParams($node, $this);
+    }
+
+    private function refactorFunctionWithoutClass(Node\Expr\FuncCall $node, $functionCallName)
+    {
+        // Change name
+        if ($this->function_function_map[$functionCallName] !== null) {
+            $newFunName = $this->function_function_map[$functionCallName];
+            $node->name = new Node\Name($newFunName);
+        }
+
+        // Change params
+        // TODO: Change params
+
+        return $node;
     }
 
     private function refactorUse(Node\Stmt\UseUse $node)
