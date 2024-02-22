@@ -3,6 +3,7 @@
 namespace AhmadAsjad\Refactor\MysqlToMysqli\Functions;
 
 use AhmadAsjad\Refactor\MysqlToMysqli\Functions\Interfaces\FunctionInterface;
+use AhmadAsjad\Refactor\MysqlToMysqli\Functions\Interfaces\OldNewSameNameInterface;
 use AhmadAsjad\Refactor\MysqlToMysqli\Param\ParamOptional;
 use AhmadAsjad\Refactor\MysqlToMysqli\Param\ParamRequired;
 use AhmadAsjad\Refactor\MysqlToMysqli\Rule\ChangeMysqlToMysqli;
@@ -12,19 +13,8 @@ use PhpParser\Node\Expr\ConstFetch;
 use PhpParser\Node\Name;
 use Rector\Rector\AbstractRector;
 
-class ArrayMap extends AbstractMysqlFunction implements FunctionInterface
+class ArrayMap extends AbstractMysqlFunction implements FunctionInterface, OldNewSameNameInterface
 {
-
-    public function getOldFunctionName(): string
-    {
-        return 'array_map';
-    }
-
-    public function getNewFunctionName(): string
-    {
-        return 'array_map';
-    }
-
     public function getOldParams(): array
     {
         return [
@@ -70,5 +60,10 @@ class ArrayMap extends AbstractMysqlFunction implements FunctionInterface
         $node->args = [$firstArg, $passedArgs[1]];
 
         return $node;
+    }
+
+    public function getFunctionName()
+    {
+        return 'array_map';
     }
 }

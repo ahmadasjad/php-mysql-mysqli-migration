@@ -30,6 +30,6 @@ command
 `vendor/bin/rector process`
 
 ## Rector version details
-refactoring for mysql supported in rector: 0.8.8
-refactoring for mysql supported in rector: 0.17.2
-refactoring for mysql removed from 0.17.3
+- refactoring for mysql supported in rector: 0.8.8
+- refactoring for mysql supported in rector: 0.17.2
+- refactoring for mysql removed from 0.17.3
