@@ -21,7 +21,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 class ChangeMysqlToMysqli extends AbstractRector
 {
     private static $_db_connection;
-    private $function_map = [
+    private $function_class_map = [
         'mysql_affected_rows' => MysqlAffectedRows::class,
         'mysql_errno' => MysqlErrorNo::class,
         'mysql_error' => MysqlError::class,
@@ -33,6 +33,57 @@ class ChangeMysqlToMysqli extends AbstractRector
         'mysql_query' => MysqlQuery::class,
         'mysql_real_escape_string' => MysqlRealEscapeString::class,
         'array_map' => ArrayMap::class,
+    ];
+
+    private $function_function_map = [
+        'mysql_affected_rows' => 'mysqli_affected_rows',
+        'mysql_client_encoding' => 'mysqli_character_set_name',
+        'mysql_close' => 'mysqli_close',
+        'mysql_connect' => 'mysqli_connect',
+        'mysql_create_db' => null, // Not directly equivalent, consider using SQL queries directly.
+        'mysql_data_seek' => 'mysqli_data_seek',
+        'mysql_db_name' => null, // Not directly equivalent, consider using SQL queries directly.
+        'mysql_db_query' => null, // Not directly equivalent, consider using mysqli_query
+        'mysql_drop_db' => null, // Not directly equivalent, consider using SQL queries directly.
+        'mysql_errno' => 'mysqli_errno',
+        'mysql_error' => 'mysqli_error',
+        'mysql_escape_string' => 'mysqli_real_escape_string', // mysqli_escape_string is an alias
+        'mysql_fetch_array' => 'mysqli_fetch_array',
+        'mysql_fetch_assoc' => 'mysqli_fetch_assoc',
+        'mysql_fetch_field' => 'mysqli_fetch_field',
+        'mysql_fetch_lengths' => 'mysqli_fetch_lengths',
+        'mysql_fetch_object' => 'mysqli_fetch_object',
+        'mysql_fetch_row' => 'mysqli_fetch_row',
+        'mysql_field_flags' => 'mysqli_fetch_field_direct',
+        'mysql_field_len' => 'mysqli_fetch_field_direct',
+        'mysql_field_name' => 'mysqli_fetch_field_direct',
+        'mysql_field_seek' => 'mysqli_field_seek',
+        'mysql_field_table' => 'mysqli_fetch_field_direct',
+        'mysql_field_type' => 'mysqli_fetch_field_direct',
+        'mysql_free_result' => 'mysqli_free_result',
+        'mysql_get_client_info' => 'mysqli_get_client_info',
+        'mysql_get_host_info' => 'mysqli_get_host_info',
+        'mysql_get_proto_info' => 'mysqli_get_proto_info',
+        'mysql_get_server_info' => 'mysqli_get_server_info',
+        'mysql_info' => 'mysqli_info',
+        'mysql_insert_id' => 'mysqli_insert_id',
+        'mysql_list_dbs' => null, // Not directly equivalent, consider using mysqli_query with "SHOW DATABASES"
+        'mysql_list_fields' => null, // Not directly equivalent, consider using SQL queries directly.
+        'mysql_list_processes' => null, // Not directly equivalent, consider using SQL queries directly.
+        'mysql_list_tables' => 'mysqli_query with "SHOW TABLES"',
+        'mysql_num_fields' => 'mysqli_num_fields',
+        'mysql_num_rows' => 'mysqli_num_rows',
+        'mysql_pconnect' => 'mysqli_connect with persistent link option',
+        'mysql_ping' => 'mysqli_ping',
+        'mysql_query' => 'mysqli_query',
+        'mysql_real_escape_string' => 'mysqli_real_escape_string',
+        'mysql_result' => 'mysqli_data_seek() in conjunction with mysqli_field_seek() and mysqli_fetch_field()',
+        'mysql_select_db' => 'mysqli_select_db',
+        'mysql_set_charset' => 'mysqli_set_charset',
+        'mysql_stat' => 'mysqli_stat',
+        'mysql_tablename' => null, // Not directly equivalent, consider using SQL queries directly.
+        'mysql_thread_id' => 'mysqli_thread_id',
+        'mysql_unbuffered_query' => 'mysqli_query with MYSQLI_USE_RESULT option',
     ];
 
     public function getRuleDefinition(): RuleDefinition
@@ -87,11 +138,15 @@ class ChangeMysqlToMysqli extends AbstractRector
             return null;
         }
 
-        if (!array_key_exists($functionCallName, $this->function_map)) {
-            return null;
+        if (array_key_exists($functionCallName, $this->function_class_map)) {
+            return $this->refactorFunctionWithClass($node, $functionCallName);
         }
+        return null;
+    }
 
-        $class = $this->function_map[$functionCallName];
+    private function refactorFunctionWithClass(Node\Expr\FuncCall $node, $functionCallName)
+    {
+        $class = $this->function_class_map[$functionCallName];
 
         $funcChanging = new $class();
 
@@ -114,11 +169,11 @@ class ChangeMysqlToMysqli extends AbstractRector
             return null;
         }
 
-        if (!array_key_exists($functionUseName, $this->function_map)) {
+        if (!array_key_exists($functionUseName, $this->function_class_map)) {
             return null;
         }
 
-        $class = $this->function_map[$functionUseName];
+        $class = $this->function_class_map[$functionUseName];
         $funcChanging = new $class();
         $newFunName = $funcChanging->getNewFunctionName();
         $node->name = new Node\Name($newFunName);
