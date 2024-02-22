@@ -2,7 +2,8 @@
 
 namespace AhmadAsjad\Refactor\MysqlToMysqli\Functions;
 
-use AhmadAsjad\Refactor\MysqlToMysqli\FunctionInterface;
+use AhmadAsjad\Refactor\MysqlToMysqli\Functions\Interfaces\FunctionInterface;
+use AhmadAsjad\Refactor\MysqlToMysqli\Functions\Traits\OnlyLinkIdentifierToMysqliTrait;
 
 class MysqlAffectedRows implements FunctionInterface
 {

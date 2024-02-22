@@ -2,7 +2,7 @@
 
 namespace AhmadAsjad\Refactor\MysqlToMysqli\Functions;
 
-use AhmadAsjad\Refactor\MysqlToMysqli\FunctionInterface;
+use AhmadAsjad\Refactor\MysqlToMysqli\Functions\Interfaces\FunctionInterface;
 use AhmadAsjad\Refactor\MysqlToMysqli\Param\ParamOptional;
 use AhmadAsjad\Refactor\MysqlToMysqli\Param\ParamRequired;
 use AhmadAsjad\Refactor\MysqlToMysqli\Rule\ChangeMysqlToMysqli;

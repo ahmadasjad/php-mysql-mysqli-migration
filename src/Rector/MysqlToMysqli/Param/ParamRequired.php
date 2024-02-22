@@ -2,7 +2,7 @@
 
 namespace AhmadAsjad\Refactor\MysqlToMysqli\Param;
 
-use AhmadAsjad\Refactor\MysqlToMysqli\ParamRequiredInterface;
+use AhmadAsjad\Refactor\MysqlToMysqli\Param\Interfaces\ParamRequiredInterface;
 
 class ParamRequired extends AbstractParam implements ParamRequiredInterface
 {

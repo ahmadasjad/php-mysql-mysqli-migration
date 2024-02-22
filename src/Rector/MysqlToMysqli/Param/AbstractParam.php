@@ -2,7 +2,7 @@
 
 namespace AhmadAsjad\Refactor\MysqlToMysqli\Param;
 
-use AhmadAsjad\Refactor\MysqlToMysqli\ParamInterface;
+use AhmadAsjad\Refactor\MysqlToMysqli\Param\Interfaces\ParamInterface;
 
 abstract class AbstractParam implements ParamInterface
 {

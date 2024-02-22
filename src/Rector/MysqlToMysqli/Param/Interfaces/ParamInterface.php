@@ -1,6 +1,6 @@
 <?php
 
-namespace AhmadAsjad\Refactor\MysqlToMysqli;
+namespace AhmadAsjad\Refactor\MysqlToMysqli\Param\Interfaces;
 
 interface ParamInterface
 {

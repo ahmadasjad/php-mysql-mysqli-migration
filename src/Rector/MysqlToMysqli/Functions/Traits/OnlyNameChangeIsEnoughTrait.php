@@ -1,6 +1,6 @@
 <?php
 
-namespace AhmadAsjad\Refactor\MysqlToMysqli\Functions;
+namespace AhmadAsjad\Refactor\MysqlToMysqli\Functions\Traits;
 
 use PhpParser\Node;
 use Rector\Rector\AbstractRector;

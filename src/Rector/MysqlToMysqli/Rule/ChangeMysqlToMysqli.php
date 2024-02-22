@@ -4,7 +4,7 @@ namespace AhmadAsjad\Refactor\MysqlToMysqli\Rule;
 
 use AhmadAsjad\Refactor\MysqlToMysqli\Functions\ArrayMap;
 use AhmadAsjad\Refactor\MysqlToMysqli\Functions\MysqlAffectedRows;
-use AhmadAsjad\Refactor\MysqlToMysqli\FunctionInterface;
+use AhmadAsjad\Refactor\MysqlToMysqli\Functions\Interfaces\FunctionInterface;
 use AhmadAsjad\Refactor\MysqlToMysqli\Functions\MysqlError;
 use AhmadAsjad\Refactor\MysqlToMysqli\Functions\MysqlErrorNo;
 use AhmadAsjad\Refactor\MysqlToMysqli\Functions\MysqlFetchArray;

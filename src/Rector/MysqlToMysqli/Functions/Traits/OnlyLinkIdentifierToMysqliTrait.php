@@ -1,6 +1,6 @@
 <?php
 
-namespace AhmadAsjad\Refactor\MysqlToMysqli\Functions;
+namespace AhmadAsjad\Refactor\MysqlToMysqli\Functions\Traits;
 
 use AhmadAsjad\Refactor\MysqlToMysqli\Param\ParamOptional;
 use AhmadAsjad\Refactor\MysqlToMysqli\Param\ParamRequired;
